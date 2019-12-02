@@ -1,0 +1,28 @@
+portfolio show page: should show that port's portstocks. worry about specific info to show later
+
+<h1><%= @portfolio.name %></h1>
+
+
+
+
+<table style="width:100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Shares</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @portstocks.each do |portstock|%>
+            <tr>
+                <td><%= portstock.stock.name %></td>
+                <td><%= portstock.stock.symbol %></td>
+                <td><%= portstock.shares %></td>
+                <td><%= portstock.stock.price %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
