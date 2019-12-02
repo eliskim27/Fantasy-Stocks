@@ -1,0 +1,8 @@
+all transactions of a given user
+
+
+<ul>
+    <% @portstocks.each do |ps| %>
+        <li><%= ps.stock.name %>:  +<%= ps.shares%> Shares</li>
+    <%end%>
+</ul>
