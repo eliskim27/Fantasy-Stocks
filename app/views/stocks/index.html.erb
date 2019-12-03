@@ -1,7 +1,22 @@
-all stocks
+All Available Stocks
 
-<ul>
-    <% @stocks.each do |stock| %>
-        <li><%= stock.name %></li>
-    <%end%>
-</ul>
+<table style="width:100%">
+    <thead>
+        <tr>
+            <th>Stock Name</th>
+            <th>Symbol</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @stocks.each do |stock|%>
+            <tr>
+                <td><%= button_to "Buy", {action: "buy", controller: "stocks", id: stock.id} %></td>
+                <td><%= stock.name %></td>
+                <td><%= stock.symbol %></td>
+                <td>$<%= stock.price %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

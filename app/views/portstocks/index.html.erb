@@ -1,8 +1,26 @@
-all transactions of a given user
+all transactions
+<table style="width:100%">
+    <thead>
+        <tr>
+            <th>Portfolio Name</th>
+            <th>Stock Name</th>
+            <th>Symbol</th>
+            <th>Shares</th>
+            <th>Purchase Price</th>
+            <th>Cost</th>
+        </tr>
+    </thead>
 
-
-<ul>
-    <% @portstocks.each do |ps| %>
-        <li><%= ps.stock.name %>:  +<%= ps.shares%> Shares</li>
-    <%end%>
-</ul>
+    <tbody>
+        <% @portstocks.each do |portstock|%>
+            <tr>
+                <td><%= portstock.portfolio.name %></td>
+                <td><%= portstock.stock.name %></td>
+                <td><%= portstock.stock.symbol %></td>
+                <td><%= portstock.shares %></td>
+                <td><%= portstock.stock.price %></td>
+                <td>$<%= portstock.stock.price * portstock.shares %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

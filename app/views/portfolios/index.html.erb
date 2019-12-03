@@ -4,6 +4,6 @@ for now, just all portfolios
 
 <ul>
     <% @portfolios.each do |portfolio| %>
-        <li><%= portfolio.name %></li>
+        <li> <%= link_to portfolio.name, portfolio_path(portfolio) %> </li>
     <%end%>
 </ul>

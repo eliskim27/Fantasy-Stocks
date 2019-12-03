@@ -2,10 +2,17 @@ class StocksController < ApplicationController
 
     def index
         @stocks = Stock.all
+        byebug
+
     end
 
     def show
         @stock = Stock.find(params[:id])
+    end
+
+    def buy 
+        #how to link the 
+        @portstock = Portstock.new
     end
 
     

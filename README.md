@@ -1,24 +1,18 @@
-# README
+Monday
+* Created Rails file
+* Migrations & Seeds
+* Ports: Index, Show
+* Portstocks: Index
+* Stocks: Index, Show
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Tuesday
+* Portstock functionality
+    * Ability to buy/sell stocks
+    * 
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Portstocks 
+    Index: All transactions
+    Show: None
+    New/Create: Transaction - Buy/Sell a stock
+    Edit/Update: none
+    Delete: None
