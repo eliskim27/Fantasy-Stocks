@@ -16,9 +16,18 @@ class PortstocksController < ApplicationController
     end
  
     def create
-        if params[:commit] == "Sell"
-            params[:portstock][:shares] = -params[:portstock][:shares].to_i
-        end
+        # if params[:commit] == "Sell"
+        #     params[:portstock][:shares] = -params[:portstock][:shares].to_i
+        #     if (params[:portstock][:shares]) <= shares_owned
+        #     else
+        #         # some error handling
+        #     end
+        # else
+        #     if ((params[:portstock][:shares])*(Stock.find(session[:stock_id]).price)).to_i <= Portfolio.find(session[:port_id]).cash
+        #     else
+        #         # "some error handlin"
+        #     end
+        # end
         @portstock = Portstock.new(
             stock_id: session[:stock_id], 
             portfolio_id: session[:port_id], 

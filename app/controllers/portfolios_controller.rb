@@ -18,6 +18,7 @@ class PortfoliosController < ApplicationController
         @portfolio = Portfolio.find(params[:id])
         @portstocks = @portfolio.portstocks
         session[:port_id] = @portfolio.id
+        @portstocks_unique = port_portstocks_unique
     end
 
     def edit
@@ -36,10 +37,6 @@ class PortfoliosController < ApplicationController
         redirect_to portfolios_path
     end
 
-    # def buy 
-    #     #how to link the 
-    #     @portstock = Portstock.new
-    # end
 
 
 
@@ -50,5 +47,18 @@ private
     def portfolio_params
         params.require(:portfolio).permit(:name, :cash)
     end
+
+    def port_portstocks_unique 
+        @portstocks.uniq do |portstock|
+            portstock.stock_id
+        end
+    end
+
+    def portstock_shares_owned
+        x = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
+        @ps_shares = x.map { |pstock| pstock.shares}
+        @ps_shares.sum
+    end
+
 
 end
