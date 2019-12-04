@@ -1,0 +1,13 @@
+<h1>Let's Buy Some Stocks!</h1>
+
+<p>Portfolio: <%= Portfolio.find(session[:port_id]).name %></p>
+<p>Stock Name: <%= Stock.find(session[:stock_id]).name %></p>
+<p>Stock Symbol: <%= Stock.find(session[:stock_id]).symbol %></p>
+<p>Stock Purchase Price: <%= Stock.find(session[:stock_id]).price %></p>
+
+
+<%= form_for @portstock do |f| %>
+    <%= f.label "How many shares?" %><br>
+    <%= f.number_field :shares %>
+    <%= f.submit "Buy"%>
+<% end %>

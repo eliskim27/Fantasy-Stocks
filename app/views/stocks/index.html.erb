@@ -1,8 +1,9 @@
 All Available Stocks
 
-<table style="width:100%">
+<table style="width:50%">
     <thead>
         <tr>
+            <th></th>
             <th>Stock Name</th>
             <th>Symbol</th>
             <th>Price</th>
@@ -12,7 +13,7 @@ All Available Stocks
     <tbody>
         <% @stocks.each do |stock|%>
             <tr>
-                <td><%= button_to "Buy", {action: "buy", controller: "stocks", id: stock.id} %></td>
+                <td><%= link_to "Buy", {action: "buy", id: stock.id} %> </td>
                 <td><%= stock.name %></td>
                 <td><%= stock.symbol %></td>
                 <td>$<%= stock.price %></td>

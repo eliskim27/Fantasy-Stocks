@@ -1,9 +1,15 @@
-all portfolios of a given user
-
+<h1>All Portfolios / Home Page</h1>
 for now, just all portfolios
+
+<br><br>
+
+<%= link_to 'Create a New Portfolio', new_portfolio_path %>
 
 <ul>
     <% @portfolios.each do |portfolio| %>
-        <li> <%= link_to portfolio.name, portfolio_path(portfolio) %> </li>
+        <li> <%= link_to portfolio.name, portfolio_path(portfolio) %> <br>
+        <%= link_to 'Rename', edit_portfolio_path(portfolio) %>
+        <%= button_to 'Delete', {action: 'delete', id: portfolio.id}, method: :delete, data: { confirm: "Are you sure?" } %>
+        </li> <br>
     <%end%>
 </ul>

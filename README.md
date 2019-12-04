@@ -16,3 +16,7 @@ Portstocks
     New/Create: Transaction - Buy/Sell a stock
     Edit/Update: none
     Delete: None
+
+Portfolio
+    All CRUD functionality
+    Index, Show, New, Create, Edit, Update, Delete
