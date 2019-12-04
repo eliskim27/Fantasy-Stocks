@@ -36,10 +36,11 @@ class PortfoliosController < ApplicationController
         redirect_to portfolios_path
     end
 
-    def buy 
-        #how to link the 
-        @portstock = Portstock.new
-    end
+    # def buy 
+    #     #how to link the 
+    #     @portstock = Portstock.new
+    # end
+
 
 
 

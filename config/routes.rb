@@ -13,11 +13,14 @@ delete '/portfolios/:id', to: "portfolios#delete"
 get '/stocks', to: "stocks#index", as: "stocks"
 get '/stocks/:id', to: "stocks#show", as: "stock"
 get '/stocks/:id/buy', to: "stocks#buy", as: "buy"
+get '/stocks/:id/sell', to: "stocks#sell", as: "sell"
+
 
 
 #portstocks
 get '/portstocks', to: "portstocks#index", as: "portstocks"
-get '/portstocks/new', to: "portstocks#new", as: "new_portstock"
+get '/portstocks/buy', to: "portstocks#buy", as: "buy_portstock"
+get '/portstocks/sell', to: "portstocks#sell", as: "sell_portstock"
 post '/portstocks', to: "portstocks#create"
 
 end

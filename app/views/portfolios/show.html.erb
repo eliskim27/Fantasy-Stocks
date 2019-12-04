@@ -12,6 +12,7 @@ portfolio show page: should show that port's portstocks. worry about specific in
 <table style="width:100%">
     <thead>
         <tr>
+            <th></th>
             <th>Name</th>
             <th>Symbol</th>
             <th>Shares</th>
@@ -22,6 +23,8 @@ portfolio show page: should show that port's portstocks. worry about specific in
     <tbody>
         <% @portstocks.each do |portstock|%>
             <tr>
+                <td><%= link_to "Sell", {controller: "stocks", action: "sell", id: portstock.stock.id} %> </td>
+                
                 <td><%= portstock.stock.name %></td>
                 <td><%= portstock.stock.symbol %></td>
                 <td><%= portstock.shares %></td>

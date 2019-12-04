@@ -10,6 +10,18 @@ Tuesday
     * Ability to buy/sell stocks
     * 
 
+Wednesday
+    * Sell a stock
+    * Logic for $$$
+        * Cash, Buy/Sell, Portfolio Value, 
+        * Instantiate with a specific $
+        * Cash - buy
+        * Portfolio Value changes on buy/sell
+        * 
+    * User Class
+    * Login/Auth
+    * API?
+
 Portstocks 
     Index: All transactions
     Show: None
@@ -20,3 +32,7 @@ Portstocks
 Portfolio
     All CRUD functionality
     Index, Show, New, Create, Edit, Update, Delete
+
+Stocks
+    Index, Show
+    Not needed: New/Create, Edit/Update, Delete

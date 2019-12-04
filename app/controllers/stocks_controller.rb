@@ -11,7 +11,13 @@ class StocksController < ApplicationController
     def buy
         @stock = Stock.find(params[:id])
         session[:stock_id] = @stock.id
-        redirect_to new_portstock_path
+        redirect_to buy_portstock_path
+    end
+
+    def sell
+        @stock = Stock.find(params[:id])
+        session[:stock_id] = @stock.id
+        redirect_to sell_portstock_path
     end
 
     
@@ -20,6 +26,8 @@ class StocksController < ApplicationController
     def stock_params
         params.require(:stock).permit(:name, :symbol, :price)
     end
+
+    
 
 
 

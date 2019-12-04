@@ -1,0 +1,18 @@
+<h1>Let's Sell Some Stocks!</h1>
+
+<p>Portfolio: <%= Portfolio.find(session[:port_id]).name %></p>
+<h2><%= Stock.find(session[:stock_id]).name %></h2>
+<p>Symbol: <%= Stock.find(session[:stock_id]).symbol %></p>
+<p>Current Stock Price: $<%= Stock.find(session[:stock_id]).price %></p>
+<p>Average Stock Price Paid: $<%= @total_amount_paid_for_stock / @shares_owned %> </p>
+<p>Total Stock Value: $<%= @shares_owned * Stock.find(session[:stock_id]).price%></p>
+<p>Total Stock Price Paid: $<%= @total_amount_paid_for_stock %> </p>
+<p>Shares Owned: <%= @shares_owned%></p>
+
+
+
+<%= form_for @portstock do |f| %>
+    <%= f.label "How many shares?" %><br>
+    <%= f.number_field :shares %>
+    <%= f.submit "Sell"%>
+<% end %>
