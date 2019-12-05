@@ -18,8 +18,8 @@ all transactions
                 <td><%= portstock.stock.name %></td>
                 <td><%= portstock.stock.symbol %></td>
                 <td><%= portstock.shares %></td>
-                <td><%= portstock.stock.price %></td>
-                <td>$<%= portstock.stock.price * portstock.shares %></td>
+                <td><%= number_to_currency(portstock.stock.price) %></td>
+                <td>$<%= number_to_currency(portstock.stock.price * portstock.shares) %></td>
             </tr>
         <% end %>
     </tbody>

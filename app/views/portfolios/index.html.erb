@@ -1,15 +1,25 @@
-<h1>All Portfolios / Home Page</h1>
-for now, just all portfolios
+<h1>All Portfolios</h1>
+<%= link_to 'Create a New Portfolio', new_portfolio_path %><br>
+<br>
+<table style="width: 50%">
+    <thead>
+        <tr>
+            <th>Portfolio Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>  
 
-<br><br>
+     <tbody>
+        <% @portfolios.each do |portfolio| %>
+            <tr>
+                <td><%= link_to portfolio.name, portfolio_path(portfolio) %></td>
+                <td><%= link_to 'Rename', edit_portfolio_path(portfolio) %></td>
+                <td><%= button_to 'Delete', {action: 'delete', id: portfolio.id}, method: :delete, data: { confirm: "Are you sure?" } %></td>
+            </tr>
+        <%end%>
+    </tbody>        
+</table>          
 
-<%= link_to 'Create a New Portfolio', new_portfolio_path %>
 
-<ul>
-    <% @portfolios.each do |portfolio| %>
-        <li> <%= link_to portfolio.name, portfolio_path(portfolio) %> <br>
-        <%= link_to 'Rename', edit_portfolio_path(portfolio) %>
-        <%= button_to 'Delete', {action: 'delete', id: portfolio.id}, method: :delete, data: { confirm: "Are you sure?" } %>
-        </li> <br>
-    <%end%>
-</ul>
+    

@@ -20,7 +20,7 @@ All Available Stocks
                 <td><%= link_to "Buy", {action: "buy", id: stock.id} %> </td>
                 <td><%= stock.name %></td>
                 <td><%= stock.symbol %></td>
-                <td>$<%= stock.price %></td>
+                <td><%= number_to_currency(stock.price) %></td>
             </tr>
         <% end %>
     </tbody>

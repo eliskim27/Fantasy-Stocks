@@ -1,20 +1,18 @@
-portfolio show page: should show that port's portstocks. worry about specific info to show later
-
 <h1><%= @portfolio.name %></h1>
-
-<h2><%= link_to 'Buy Stocks', stocks_path %></h2>
-
 <%= link_to 'Back to All Portfolios', portfolios_path %><br>
 <%= link_to 'Rename This Portfolio', edit_portfolio_path(@portfolio) %>
 <%= button_to 'Delete This Portfolio', {action: 'delete', id: @portfolio.id}, method: :delete, data: { confirm: "Are you sure?" } %>
 
 <div>
-    <h4>Cash Available: <%= @portfolio.cash %></h4>
-    <h4>Total Value of Stocks: <%= @portstocks.map{|ps|ps.shares*ps.stock.price}.sum %></h4>
-    <h4>Total Value of Portfolio: <%= @portfolio.cash + (@portstocks.map{|ps|ps.shares*ps.stock.price}.sum)%></h4>
+    <h4>Cash Available: <%= number_to_currency(@portfolio.cash) %></h4>
+    <h4>Total Value of Stocks: <%= number_to_currency(@portstocks.map{|ps|ps.shares*ps.stock.price}.sum) %></h4>
+    <h4>Total Value of Portfolio: <%= number_to_currency(@portfolio.cash + (@portstocks.map{|ps|ps.shares*ps.stock.price}.sum))%></h4>
 </div>
 
-<table style="width:75%">
+<h2><%= link_to 'Buy Stocks', stocks_path %></h2>
+
+
+<table style="width:100%">
     <thead>
         <tr>
             <th></th>
@@ -41,12 +39,12 @@ portfolio show page: should show that port's portstocks. worry about specific in
                 <td><%= 
                     @y = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
                     ps_costs = @y.map { |pstock| pstock.shares * pstock.purchase_price}
-                    ps_costs.sum/@ps_shares.sum %></td>
-                <td><%= portstock.stock.price %></td>
+                    number_to_currency(ps_costs.sum/@ps_shares.sum) %></td>
+                <td><%= number_to_currency(portstock.stock.price) %></td>
                 <td><%=
                     @z = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
                     @ps_shares = @x.map { |pstock| pstock.shares}
-                    (@ps_shares.sum)*(portstock.stock.price) %></td>
+                    number_to_currency((@ps_shares.sum)*(portstock.stock.price)) %></td>
             </tr>
         <% end %>
     </tbody>
