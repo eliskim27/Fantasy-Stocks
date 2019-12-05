@@ -19,6 +19,7 @@ class PortfoliosController < ApplicationController
         @portstocks = @portfolio.portstocks
         session[:port_id] = @portfolio.id
         @portstocks_unique = port_portstocks_unique
+        @portstocks_w_shares = portstocks_w_shares
     end
 
     def edit
@@ -54,10 +55,23 @@ private
         end
     end
 
-    def portstock_shares_owned
-        x = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
-        @ps_shares = x.map { |pstock| pstock.shares}
-        @ps_shares.sum
+    def portstocks_w_shares
+        @ps_uniq_shares = []
+        @portstocks_unique.each do |portstock|
+            @ps_shares = stocks_in_question(portstock).map do |pstock| 
+                pstock.shares
+            end
+            if @ps_shares.sum > 0
+                @ps_uniq_shares << portstock
+            end
+        end
+        @ps_uniq_shares
+    end
+
+    def stocks_in_question(portstock)
+        @portstocks.select do |ps|
+            ps.stock.id == portstock.stock_id
+        end
     end
 
 

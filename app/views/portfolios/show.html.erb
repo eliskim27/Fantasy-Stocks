@@ -26,21 +26,21 @@ portfolio show page: should show that port's portstocks. worry about specific in
     </thead>
 
     <tbody>
-        <% @portstocks_unique.each do |portstock|%>
+        <% @portstocks_w_shares.each do |portstock|%>
             <tr>
                 <td><%= link_to "Sell", {controller: "stocks", action: "sell", id: portstock.stock.id} %> </td>
-
                 <td><%= portstock.stock.name %></td>
                 <td><%= portstock.stock.symbol %></td>
                 <td><%= 
-                    x = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
-                    @ps_shares = x.map { |pstock| pstock.shares}
+                    @x = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
+                    @ps_shares = @x.map { |pstock| pstock.shares}
                     @ps_shares.sum %>
                 </td>
                 <td><%= 
-                    x = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
-                    ps_shares = x.map { |pstock| pstock.shares * pstock.purchase_price}
-                    ps_shares.sum %> <!--/@ps_shares.sum-->
+                    @y = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
+                    ps_costs = @y.map { |pstock| pstock.shares * pstock.purchase_price}
+                    ps_costs.sum/@ps_shares.sum %>
+                    <% byebug%>
                 </td>
             </tr>
         <% end %>
