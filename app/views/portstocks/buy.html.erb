@@ -7,7 +7,8 @@
 <p>Portfolio: <%= Portfolio.find(session[:port_id]).name %></p>
 <p>Stock Name: <%= Stock.find(session[:stock_id]).name %></p>
 <p>Stock Symbol: <%= Stock.find(session[:stock_id]).symbol %></p>
-<p>Stock Purchase Price: <%= Stock.find(session[:stock_id]).price %></p>
+<p>Cash Available: <%= "$#{Portfolio.find(session[:port_id]).cash}" %></p>
+<p>Stock Current Price: <%= "$#{Stock.find(session[:stock_id]).price}" %></p>
 
 
 <%= form_for @portstock, url: buy_create_path do |f| %>
@@ -15,5 +16,6 @@
     <%= f.number_field :shares %>
     <%= f.submit "Buy" %>
 <% end %>
+<p>(You can purchase <%= buyable_shares(session[:port_id], session[:stock_id]) %> shares.)</p>
 
 <p><%= link_to 'Cancel', portfolio_path(session[:port_id]) %><br>

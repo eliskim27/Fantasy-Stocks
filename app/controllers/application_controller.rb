@@ -1,9 +1,10 @@
 class ApplicationController < ActionController::Base
-    helper_method :portfolio_cash
+    helper_method :buyable_shares
 
-    def portfolio_cash(portfolio)
-        #Portfolio.find(session[:port_id]).cash
-        Portfolio.find(portfolio).cash
+    def buyable_shares(port_id, stock_id)
+        cash_available = Portfolio.find(port_id).cash
+        current_stock_price = Stock.find(stock_id).price
+        cash_available / current_stock_price
     end
 
 
