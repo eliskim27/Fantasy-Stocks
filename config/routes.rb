@@ -21,6 +21,9 @@ get '/stocks/:id/sell', to: "stocks#sell", as: "sell"
 get '/portstocks', to: "portstocks#index", as: "portstocks"
 get '/portstocks/buy', to: "portstocks#buy", as: "buy_portstock"
 get '/portstocks/sell', to: "portstocks#sell", as: "sell_portstock"
-post '/portstocks', to: "portstocks#create"
+# post '/portstocks', to: "portstocks#create"
+post '/portstocks/buy', to: "portstocks#buy_create", as: "buy_create"
+post '/portstocks/sell', to: "portstocks#sell_create", as: "sell_create"
+
 
 end

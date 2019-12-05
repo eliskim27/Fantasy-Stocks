@@ -1,13 +1,19 @@
 <h1>Let's Buy Some Stocks!</h1>
 
+<% if flash[:message] %>
+    <h3> 🙅‍♂️<%= flash[:message] %>🙅‍♀️</h3>
+<% end%>
+
 <p>Portfolio: <%= Portfolio.find(session[:port_id]).name %></p>
 <p>Stock Name: <%= Stock.find(session[:stock_id]).name %></p>
 <p>Stock Symbol: <%= Stock.find(session[:stock_id]).symbol %></p>
 <p>Stock Purchase Price: <%= Stock.find(session[:stock_id]).price %></p>
 
 
-<%= form_for @portstock do |f| %>
-    <%= f.label "How many shares?" %><br>
+<%= form_for @portstock, url: buy_create_path do |f| %>
+    <%= f.label "How many shares would you like to purchase?" %><br>
     <%= f.number_field :shares %>
-    <%= f.submit "Buy"%>
+    <%= f.submit "Buy" %>
 <% end %>
+
+<p><%= link_to 'Cancel', portfolio_path(session[:port_id]) %><br>

@@ -15,31 +15,49 @@ class PortstocksController < ApplicationController
         @portstock = Portstock.new
     end
  
-    def create
-        # if params[:commit] == "Sell"
-        #     params[:portstock][:shares] = -params[:portstock][:shares].to_i
-        #     if (params[:portstock][:shares]) <= shares_owned
-        #     else
-        #         # some error handling
-        #     end
-        # else
-        #     if ((params[:portstock][:shares])*(Stock.find(session[:stock_id]).price)).to_i <= Portfolio.find(session[:port_id]).cash
-        #     else
-        #         # "some error handlin"
-        #     end
-        # end
-        @portstock = Portstock.new(
-            stock_id: session[:stock_id], 
-            portfolio_id: session[:port_id], 
-            shares: params[:portstock][:shares], 
-            purchase_price: Stock.find(session[:stock_id]).price)
-        @portstock.save
-        redirect_to portfolio_path(session[:port_id])
+    def sell_create
+        share_count = params[:portstock][:shares].to_i
+        stock_price = Stock.find(session[:stock_id]).price
+        total_price = share_count * stock_price
+        current_port = Portfolio.find(session[:port_id])
+        port_cash = Portfolio.find(session[:port_id]).cash
+        if share_count <= shares_owned
+            @portstock = Portstock.new(
+                stock_id: session[:stock_id], 
+                portfolio_id: session[:port_id], 
+                shares: -share_count, 
+                purchase_price: Stock.find(session[:stock_id]).price)
+            @portstock.save
+            current_port.cash += total_price
+            current_port.save
+            redirect_to portfolio_path(session[:port_id])
+        else
+            flash[:message] = "You don't have enough shares brah!"
+            redirect_to sell_portstock_path
+        end
     end
 
-    # Sell: <ActionController::Parameters {"authenticity_token"=>"MZVO12ODZ7wvZcaJaRKF0k/laQ8bg6KWAHHhYkLyPjBnXn+LSXLOCBK2opKFf8BF+Ds4diTzljjVFgFoBDs3wg==", "portstock"=>{"shares"=>"10"}, "commit"=>"Sell", "controller"=>"portstocks", "action"=>"create"} permitted: false>
-    # Buy: <ActionController::Parameters {"authenticity_token"=>"+XIz+h7HQQN1E9GvcvNwX+aHSnGSDepbzWRkx6Gq9N+U26ULd8gcbecS44Pt+8e1oZDxSCRGMfHjkQO4Vd3z4A==", "portstock"=>{"shares"=>"2"}, "commit"=>"Buy", "controller"=>"portstocks", "action"=>"create"} permitted: false>
-    # (byebug) params.keys ["authenticity_token", "portstock", "commit", "controller", "action"]
+    def buy_create
+        share_count = params[:portstock][:shares].to_i
+        stock_price = Stock.find(session[:stock_id]).price
+        total_price = share_count * stock_price
+        current_port = Portfolio.find(session[:port_id])
+        port_cash = Portfolio.find(session[:port_id]).cash
+        if share_count * stock_price <= port_cash
+            @portstock = Portstock.new(
+                stock_id: session[:stock_id], 
+                portfolio_id: session[:port_id], 
+                shares: params[:portstock][:shares], 
+                purchase_price: Stock.find(session[:stock_id]).price)
+            @portstock.save
+            current_port.cash -= total_price
+            current_port.save
+            redirect_to portfolio_path(session[:port_id])    
+        else
+            flash[:message] = "You do not have enough cash brah!"
+            redirect_to buy_portstock_path    
+        end
+    end
 
 
     private

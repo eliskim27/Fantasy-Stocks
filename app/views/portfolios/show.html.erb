@@ -22,6 +22,9 @@ portfolio show page: should show that port's portstocks. worry about specific in
             <th>Symbol</th>
             <th>Shares Owned</th>
             <th>Avg Price Paid per Stock</th>
+            <th>Current Price</th>
+            <th>Total Stock Value</th>
+
         </tr>
     </thead>
 
@@ -34,14 +37,16 @@ portfolio show page: should show that port's portstocks. worry about specific in
                 <td><%= 
                     @x = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
                     @ps_shares = @x.map { |pstock| pstock.shares}
-                    @ps_shares.sum %>
-                </td>
+                    @ps_shares.sum %></td>
                 <td><%= 
                     @y = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
                     ps_costs = @y.map { |pstock| pstock.shares * pstock.purchase_price}
-                    ps_costs.sum/@ps_shares.sum %>
-                    <% byebug%>
-                </td>
+                    ps_costs.sum/@ps_shares.sum %></td>
+                <td><%= portstock.stock.price %></td>
+                <td><%=
+                    @z = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
+                    @ps_shares = @x.map { |pstock| pstock.shares}
+                    (@ps_shares.sum)*(portstock.stock.price) %></td>
             </tr>
         <% end %>
     </tbody>

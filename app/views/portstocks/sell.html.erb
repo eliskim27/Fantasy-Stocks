@@ -2,6 +2,10 @@
 <p><%= link_to 'Back to Portfolio', portfolio_path(session[:port_id]) %><br>
 </p>
 
+<% if flash[:message] %>
+    <h3> 🙅‍♂️<%= flash[:message] %>🙅‍♀️</h3>
+<% end%>
+
 <p>Portfolio: <%= Portfolio.find(session[:port_id]).name %></p>
 <h2><%= Stock.find(session[:stock_id]).name %></h2>
 <p>Symbol: <%= Stock.find(session[:stock_id]).symbol %></p>
@@ -13,8 +17,10 @@
 
 
 
-<%= form_for @portstock do |f| %>
-    <%= f.label "How many shares?" %><br>
+<%= form_for @portstock, url: sell_create_path do |f| %>
+    <%= f.label "How many shares would you like to sell?" %><br>
     <%= f.number_field :shares %>
     <%= f.submit "Sell"%>
 <% end %>
+
+<p><%= link_to 'Cancel', portfolio_path(session[:port_id]) %><br>
