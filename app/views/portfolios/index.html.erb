@@ -1,25 +1,28 @@
-<h1>All Portfolios</h1>
-<%= link_to 'Create a New Portfolio', new_portfolio_path %><br>
-<br>
-<table style="width: 50%">
-    <thead>
-        <tr>
-            <th>Portfolio Name</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>  
+<h1>Your Portfolios</h1>
 
-     <tbody>
-        <% @portfolios.each do |portfolio| %>
+<%= link_to 'Create a New Portfolio', new_portfolio_path, class: "btn btn-primary" %><br>
+<br>
+<div class="container-lg">
+    <table class="table">
+        <thead class="thead-dark">
             <tr>
-                <td><%= link_to portfolio.name, portfolio_path(portfolio) %></td>
-                <td><%= link_to 'Rename', edit_portfolio_path(portfolio) %></td>
-                <td><%= button_to 'Delete', {action: 'delete', id: portfolio.id}, method: :delete, data: { confirm: "Are you sure?" } %></td>
+                <th scope="col" >Portfolio Name</th>
+                <th scope="col" ></th>
+                <th scope="col" ></th>
             </tr>
-        <%end%>
-    </tbody>        
-</table>          
+        </thead>  
+
+        <tbody>
+            <% @portfolios.each do |portfolio| %>
+                <tr scope="row">
+                    <td><%= link_to portfolio.name, portfolio_path(portfolio) %></td>
+                    <td><%= link_to 'Rename', edit_portfolio_path(portfolio) %></td>
+                    <td><%= button_to 'Delete', {action: 'delete', id: portfolio.id}, method: :delete, class: "btn btn-secondary", data: { confirm: "Are you sure?" } %></td>
+                </tr>
+            <%end%>
+        </tbody>        
+    </table>     
+</div>     
 
 
     

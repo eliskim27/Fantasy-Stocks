@@ -20,7 +20,7 @@
 <%= form_for @portstock, url: sell_create_path do |f| %>
     <%= f.label "How many shares would you like to sell?" %><br>
     <%= f.number_field :shares %>
-    <%= f.submit "Sell"%>
+    <%= f.submit "Sell", class: "btn btn-primary"%>
 <% end %>
 
 <p><%= link_to 'Cancel', portfolio_path(session[:port_id]) %><br>

@@ -17,7 +17,7 @@ All Available Stocks
     <tbody>
         <% @stocks.each do |stock|%>
             <tr>
-                <td><%= link_to "Buy", {action: "buy", id: stock.id} %> </td>
+                <td><%= link_to "Buy", {action: "buy", id: stock.id}, class: "btn btn-primary" %> </td>
                 <td><%= stock.name %></td>
                 <td><%= stock.symbol %></td>
                 <td><%= number_to_currency(stock.price) %></td>
