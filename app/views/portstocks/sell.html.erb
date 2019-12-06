@@ -1,7 +1,6 @@
 <p><%= link_to 'Back to Portfolio', portfolio_path(session[:port_id]) %><br>
 </p>
-<h1>Let's Sell Some Stocks!</h1>
-
+<h1 class="h1 mb-0 text-gray-800">Let's Sell Some Stocks!</h1>
 
 
 
@@ -12,15 +11,16 @@
 <% end%>
 
 
-<p>Portfolio: <%= Portfolio.find(session[:port_id]).name %></p>
-<h2><%= Stock.find(session[:stock_id]).name %></h2>
-<p>Symbol: <%= Stock.find(session[:stock_id]).symbol %></p>
-<p>Current Stock Price: <%= number_to_currency(Stock.find(session[:stock_id]).price) %></p>
-<p>Average Stock Price Paid: <%= number_to_currency(@total_amount_paid_for_stock / @shares_owned) %> </p>
-<p>Total Stock Value: <%= number_to_currency(@shares_owned * Stock.find(session[:stock_id]).price) %></p>
-<p>Total Stock Price Paid: <%= number_to_currency(@total_amount_paid_for_stock) %> </p>
-<p>Shares Owned: <%= @shares_owned%></p>
-
+<p class="p mb-0 text-gray-800">Portfolio: <%= Portfolio.find(session[:port_id]).name %></p><br>
+<h2 class="h2 mb-0 text-gray-800"><%= Stock.find(session[:stock_id]).name %></h2>
+<p class="p mb-0 text-gray-800">Symbol: <%= Stock.find(session[:stock_id]).symbol %></p>
+<br>
+<p class="p mb-0 text-gray-800">Current Stock Price: <%= number_to_currency(Stock.find(session[:stock_id]).price) %></p>
+<p class="p mb-0 text-gray-800">Average Stock Price Paid: <%= number_to_currency(@total_amount_paid_for_stock / @shares_owned) %> </p>
+<p class="p mb-0 text-gray-800">Total Stock Value: <%= number_to_currency(@shares_owned * Stock.find(session[:stock_id]).price) %></p>
+<p class="p mb-0 text-gray-800">Total Stock Price Paid: <%= number_to_currency(@total_amount_paid_for_stock) %> </p>
+<p class="p mb-0 text-gray-800">Shares Owned: <%= @shares_owned%></p>
+<br>
 
 
 <%= form_for @portstock, url: sell_create_path do |f| %>

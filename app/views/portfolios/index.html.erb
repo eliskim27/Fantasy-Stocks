@@ -15,7 +15,6 @@
                         <tr>
                             <th scope="col" >Portfolio Name</th>
                             <th scope="col" ></th>
-                            <th scope="col" ></th>
                         </tr>
                     </thead>  
 
@@ -23,7 +22,6 @@
                         <% @portfolios.each do |portfolio| %>
                             <tr scope="row">
                                 <td><%= link_to portfolio.name, portfolio_path(portfolio) %></td>
-                                <td><%= link_to 'Rename', edit_portfolio_path(portfolio) %></td>
                                 <td><%= button_to 'Delete', {action: 'delete', id: portfolio.id}, method: :delete, class: "btn btn-secondary", data: { confirm: "Are you sure?" } %></td>
                             </tr>
                         <%end%>

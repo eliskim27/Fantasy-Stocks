@@ -70,6 +70,7 @@
                             <th>Avg Price Paid per Stock</th>
                             <th>Current Price</th>
                             <th>Total Stock Value</th>
+                            <th>% Return</th>
 
                         </tr>
                     </thead>
@@ -87,12 +88,13 @@
                                 <td><%= 
                                     @y = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
                                     ps_costs = @y.map { |pstock| pstock.shares * pstock.purchase_price}
-                                    number_to_currency(ps_costs.sum/@ps_shares.sum) %></td>
+                                    number_to_currency(@avg_stockp_paid = ps_costs.sum/@ps_shares.sum) %></td>
                                 <td><%= number_to_currency(portstock.stock.price) %></td>
                                 <td><%=
                                     @z = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
                                     @ps_shares = @x.map { |pstock| pstock.shares}
-                                    number_to_currency((@ps_shares.sum)*(portstock.stock.price)) %></td>
+                                    number_to_currency(@total_stock_value = (@ps_shares.sum)*(portstock.stock.price)) %></td>
+                                <%= percent_return(portstock, @avg_stockp_paid) %>
                             </tr>
                         <% end %>
                     </tbody>

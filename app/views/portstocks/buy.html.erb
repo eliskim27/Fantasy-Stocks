@@ -1,4 +1,5 @@
-<h1>Let's Buy Some Stocks!</h1>
+<p><%= link_to 'Back to Portfolio', portfolio_path(session[:port_id]) %><br>
+<h1 class="h1 mb-0 text-gray-800">Let's Buy Some Stocks!</h1>
 
 
 <% if flash[:message] %>
@@ -9,17 +10,18 @@
 
 
 
-<p>Portfolio: <%= Portfolio.find(session[:port_id]).name %></p>
-<p>Stock Name: <%= Stock.find(session[:stock_id]).name %></p>
-<p>Stock Symbol: <%= Stock.find(session[:stock_id]).symbol %></p>
-<p>Cash Available: <%= number_to_currency(Portfolio.find(session[:port_id]).cash) %></p>
-<p>Stock Current Price: <%= number_to_currency(Stock.find(session[:stock_id]).price) %></p>
-
+<p class="p mb-0 text-gray-800">Portfolio: <%= Portfolio.find(session[:port_id]).name %></p><br>
+<h2 class="h2 mb-0 text-gray-800"><%= Stock.find(session[:stock_id]).name %></h2>
+<p class="p mb-0 text-gray-800">Stock Symbol: <%= Stock.find(session[:stock_id]).symbol %></p>
+<br>
+<p class="p mb-0 text-gray-800">Cash Available: <%= number_to_currency(Portfolio.find(session[:port_id]).cash) %></p>
+<p class="p mb-0 text-gray-800">Stock Current Price: <%= number_to_currency(Stock.find(session[:stock_id]).price) %></p>
+<br>
 
 <%= form_for @portstock, url: buy_create_path do |f| %>
     <%= f.label "How many shares would you like to purchase?" %><br>
     <%= f.number_field :shares %>
-    <%= f.submit "Buy" %>
+    <%= f.submit "Buy", class: "btn btn-primary" %>
 <% end %>
 <p>(You can purchase <%= buyable_shares(session[:port_id], session[:stock_id]) %> shares.)</p>
 

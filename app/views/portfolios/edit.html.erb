@@ -15,12 +15,15 @@
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h2 text-gray-900 mb-2">Rename Your Portfolio</h1>
-                    <p class="mb-4">Choose a new name for your portfolio. The current name is: <%= @portfolio.name %></p>
+                    <p class="mb-4">Choose a new name for your portfolio.</p>
+                    <p class="mb-4">The current name is: <%= @portfolio.name %></p>
                     <%= form_for @portfolio do |f| %>
                         <% f.label "What Would You Like To Call Your Portfolio?" %>
                         <%= f.text_field :name %>
                         <%= f.submit "Update Name", class: "d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" %>
                     <% end %>
+                    <br>
+                    <p><%= link_to 'Cancel', portfolio_path(session[:port_id]) %>
                 </div>
             </div>
           </div>
