@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 #portfolios
+root to: "welcome#index"
 get '/portfolios', to: "portfolios#index", as: "portfolios"
 get '/portfolios/new', to: "portfolios#new", as: "new_portfolio"
 post '/portfolios', to: "portfolios#create"

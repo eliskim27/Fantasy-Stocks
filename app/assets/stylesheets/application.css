@@ -256,6 +256,10 @@
   button {
     border-radius: 0;
   }
+
+  #buttons {
+    display: flex;
+  }
   
   button:focus {
     outline: 1px dotted;

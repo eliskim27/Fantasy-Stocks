@@ -1,8 +1,8 @@
 <%= link_to 'Back to All Portfolios', portfolios_path %><br>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h1 mb-0 text-gray-800"><%= @portfolio.name %></h1>
-    <div class="inline-buttons">
-        <%= link_to 'Rename This Portfolio', edit_portfolio_path(@portfolio), class: "d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm" %>
+    <div id="buttons">
+        <%= link_to 'Rename This Portfolio', edit_portfolio_path(@portfolio), class: "d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"  %>
         <%= button_to 'Delete This Portfolio', {action: 'delete', id: @portfolio.id}, method: :delete, class: "d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm", data: { confirm: "Are you sure?" } %>
     </div>
 </div>
