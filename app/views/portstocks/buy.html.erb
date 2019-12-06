@@ -1,8 +1,13 @@
 <h1>Let's Buy Some Stocks!</h1>
 
+
 <% if flash[:message] %>
-    <h3> 🙅‍♂️<%= flash[:message] %>🙅‍♀️</h3>
+    <div class="alert alert-danger" role="alert">
+        "🙅‍♂️<%= flash[:message] %>🙅‍"
+    </div>
 <% end%>
+
+
 
 <p>Portfolio: <%= Portfolio.find(session[:port_id]).name %></p>
 <p>Stock Name: <%= Stock.find(session[:stock_id]).name %></p>

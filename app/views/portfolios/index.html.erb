@@ -1,27 +1,37 @@
-<h1>Your Portfolios</h1>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h1 mb-0 text-gray-800">Your Portfolios</h1>                   
+</div> 
+
+
 
 <%= link_to 'Create a New Portfolio', new_portfolio_path, class: "btn btn-primary" %><br>
 <br>
-<div class="container-lg">
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col" >Portfolio Name</th>
-                <th scope="col" ></th>
-                <th scope="col" ></th>
-            </tr>
-        </thead>  
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" >Portfolio Name</th>
+                            <th scope="col" ></th>
+                            <th scope="col" ></th>
+                        </tr>
+                    </thead>  
 
-        <tbody>
-            <% @portfolios.each do |portfolio| %>
-                <tr scope="row">
-                    <td><%= link_to portfolio.name, portfolio_path(portfolio) %></td>
-                    <td><%= link_to 'Rename', edit_portfolio_path(portfolio) %></td>
-                    <td><%= button_to 'Delete', {action: 'delete', id: portfolio.id}, method: :delete, class: "btn btn-secondary", data: { confirm: "Are you sure?" } %></td>
-                </tr>
-            <%end%>
-        </tbody>        
-    </table>     
+                    <tbody>
+                        <% @portfolios.each do |portfolio| %>
+                            <tr scope="row">
+                                <td><%= link_to portfolio.name, portfolio_path(portfolio) %></td>
+                                <td><%= link_to 'Rename', edit_portfolio_path(portfolio) %></td>
+                                <td><%= button_to 'Delete', {action: 'delete', id: portfolio.id}, method: :delete, class: "btn btn-secondary", data: { confirm: "Are you sure?" } %></td>
+                            </tr>
+                        <%end%>
+                    </tbody>        
+                </table>     
+            </div>
+        </div>
+    </div>                      
 </div>     
 
 

@@ -1,6 +1,6 @@
-# Portfolio.destroy_all
-# Stock.destroy_all
-# Portstock.destroy_all
+Portfolio.destroy_all
+Stock.destroy_all
+Portstock.destroy_all
 
 # port1 = Portfolio.create(name: "test 1", cash: 100000)
 # port2 = Portfolio.create(name: "test 2", cash: 100000)

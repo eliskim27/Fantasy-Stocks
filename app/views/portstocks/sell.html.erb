@@ -1,10 +1,16 @@
-<h1>Let's Sell Some Stocks!</h1>
 <p><%= link_to 'Back to Portfolio', portfolio_path(session[:port_id]) %><br>
 </p>
+<h1>Let's Sell Some Stocks!</h1>
+
+
+
 
 <% if flash[:message] %>
-    <h3> 🙅‍♂️<%= flash[:message] %>🙅‍♀️</h3>
+    <div class="alert alert-danger" role="alert">
+         "🙅‍♂️<%= flash[:message] %>🙅‍♀️"
+    </div>
 <% end%>
+
 
 <p>Portfolio: <%= Portfolio.find(session[:port_id]).name %></p>
 <h2><%= Stock.find(session[:stock_id]).name %></h2>

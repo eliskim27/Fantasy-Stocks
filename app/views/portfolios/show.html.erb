@@ -1,94 +1,103 @@
 <%= link_to 'Back to All Portfolios', portfolios_path %><br>
-<h1><%= @portfolio.name %></h1>
-<%= link_to 'Rename This Portfolio', edit_portfolio_path(@portfolio) %>
-<%= button_to 'Delete This Portfolio', {action: 'delete', id: @portfolio.id}, method: :delete, class: "btn btn-secondary btn-sm", data: { confirm: "Are you sure?" } %>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h1 mb-0 text-gray-800"><%= @portfolio.name %></h1>
+    <div class="inline-buttons">
+        <%= link_to 'Rename This Portfolio', edit_portfolio_path(@portfolio), class: "d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm" %>
+        <%= button_to 'Delete This Portfolio', {action: 'delete', id: @portfolio.id}, method: :delete, class: "d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm", data: { confirm: "Are you sure?" } %>
+    </div>
+</div>
 <br>
-<div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-            <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> 
-                        Cash Available: 
+<div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Cash Available</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= number_to_currency(@portfolio.cash) %></div>
                     </div>
-                    </div class="h5 mb-0 font-weight-bold text-gray-800">
-                        <%= number_to_currency(@portfolio.cash) %>
+                    <div class="col-auto">
                     </div>
+                  </div>
                 </div>
-            </div> 
-        </div> 
-    </div>     
-</div>    
-<div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-            <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> 
-                        Total Value of Stocks: 
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Value of Stocks</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= number_to_currency(@portstocks.map{|ps|ps.shares*ps.stock.price}.sum) %></div>
                     </div>
-                    </div class="h5 mb-0 font-weight-bold text-gray-800">
-                        <%= number_to_currency(@portstocks.map{|ps|ps.shares*ps.stock.price}.sum) %>
+                    <div class="col-auto">
                     </div>
+                  </div>
                 </div>
-            </div> 
-        </div> 
-    </div>     
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Value of Portfolio</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= number_to_currency(@portfolio.cash + (@portstocks.map{|ps|ps.shares*ps.stock.price}.sum)) %></div>
+                    </div>
+                    <div class="col-auto">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+ 
 </div> 
-<div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-info shadow h-100 py-2">
-        <div class="card-body">
-            <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> 
-                        Total Value of Portfolio: 
-                    </div>
-                    </div class="h5 mb-0 font-weight-bold text-gray-800">
-                        <%= number_to_currency(@portfolio.cash + (@portstocks.map{|ps|ps.shares*ps.stock.price}.sum)) %>
-                    </div>
-                </div>
-            </div> 
-        </div> 
-    </div>     
-</div> 
+
 <h2><%= link_to 'Buy Stocks', stocks_path, class: "btn btn-primary btn-lg" %></h2>
 <br>
-<div class="container-lg">
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Symbol</th>
-            <th>Shares Owned</th>
-            <th>Avg Price Paid per Stock</th>
-            <th>Current Price</th>
-            <th>Total Stock Value</th>
 
-        </tr>
-    </thead>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Symbol</th>
+                            <th>Shares Owned</th>
+                            <th>Avg Price Paid per Stock</th>
+                            <th>Current Price</th>
+                            <th>Total Stock Value</th>
 
-    <tbody>
-        <% @portstocks_w_shares.each do |portstock|%>
-            <tr>
-                <td><%= link_to "Sell", {controller: "stocks", action: "sell", id: portstock.stock.id}, class: "btn btn-primary" %> </td>
-                <td><%= portstock.stock.name %></td>
-                <td><%= portstock.stock.symbol %></td>
-                <td><%= 
-                    @x = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
-                    @ps_shares = @x.map { |pstock| pstock.shares}
-                    @ps_shares.sum %></td>
-                <td><%= 
-                    @y = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
-                    ps_costs = @y.map { |pstock| pstock.shares * pstock.purchase_price}
-                    number_to_currency(ps_costs.sum/@ps_shares.sum) %></td>
-                <td><%= number_to_currency(portstock.stock.price) %></td>
-                <td><%=
-                    @z = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
-                    @ps_shares = @x.map { |pstock| pstock.shares}
-                    number_to_currency((@ps_shares.sum)*(portstock.stock.price)) %></td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <% @portstocks_w_shares.each do |portstock|%>
+                            <tr>
+                                <td><%= link_to "Sell", {controller: "stocks", action: "sell", id: portstock.stock.id}, class: "d-none d-sm-inline-block btn btn-sm btn-primary " %> </td>
+                                <td><%= portstock.stock.name %></td>
+                                <td><%= portstock.stock.symbol %></td>
+                                <td><%= 
+                                    @x = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
+                                    @ps_shares = @x.map { |pstock| pstock.shares}
+                                    @ps_shares.sum %></td>
+                                <td><%= 
+                                    @y = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
+                                    ps_costs = @y.map { |pstock| pstock.shares * pstock.purchase_price}
+                                    number_to_currency(ps_costs.sum/@ps_shares.sum) %></td>
+                                <td><%= number_to_currency(portstock.stock.price) %></td>
+                                <td><%=
+                                    @z = @portstocks.select{|ps| ps.stock_id == portstock.stock_id}
+                                    @ps_shares = @x.map { |pstock| pstock.shares}
+                                    number_to_currency((@ps_shares.sum)*(portstock.stock.price)) %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>    
+        </div>
+    </div>
 </div>
