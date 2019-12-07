@@ -34,6 +34,7 @@ class PortfoliosController < ApplicationController
 
     def delete
         portfolio = Portfolio.find(params[:id])
+        session.destroy
         portfolio.destroy
         redirect_to portfolios_path
     end
